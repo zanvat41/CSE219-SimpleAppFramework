@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -44,14 +45,25 @@ public class AppGUI implements AppStyleArbiter {
     
     // THIS IS THE TOP TOOLBAR AND ITS CONTROLS
     protected FlowPane fileToolbarPane;
-    protected FlowPane leftTool;
-    protected FlowPane midTool;
-    protected FlowPane rightTool;
+    protected HBox leftTool;
+    protected HBox midTool;
+    protected HBox rightTool;
     protected Button newButton;
     protected Button loadButton;
     protected Button saveButton;
     protected Button saveAsButton;
+    protected Button photoButton;
+    protected Button codeButton;
     protected Button exitButton;
+    protected Button selectButton;
+    protected Button resizeButton;
+    protected Button addClassButton;
+    protected Button addInterfaceButton;
+    protected Button removeButton;
+    protected Button undoButton;
+    protected Button redoButton;
+    protected Button zoomInButton;
+    protected Button zoomOutButton;
     
     // HERE ARE OUR DIALOGS
     protected AppYesNoCancelDialogSingleton yesNoCancelDialog;
@@ -139,9 +151,9 @@ public class AppGUI implements AppStyleArbiter {
      */
     private void initFileToolbar(AppTemplate app) {
         fileToolbarPane = new FlowPane();
-        leftTool = new FlowPane();
-        midTool = new FlowPane();
-        rightTool = new FlowPane();
+        leftTool = new HBox();
+        midTool = new HBox();
+        rightTool = new HBox();
 
         // DIVIDE THE TOOL BAR PANE TO BE 3 PARTS
         fileToolbarPane.getChildren().add(leftTool);
@@ -149,14 +161,25 @@ public class AppGUI implements AppStyleArbiter {
         fileToolbarPane.getChildren().add(rightTool);
                 
                 
-        // HERE ARE OUR FILE TOOLBAR BUTTONS, NOTE THAT SOME WILL
+        // HERE ARE OUR FILE TOOLBAR BUTTONS (TOP LEFT), NOTE THAT SOME WILL
         // START AS ENABLED (false), WHILE OTHERS DISABLED (true)
-        
+
         newButton = initChildButton(leftTool,	NEW_ICON.toString(),	    NEW_TOOLTIP.toString(),	false);
         loadButton = initChildButton(leftTool,	LOAD_ICON.toString(),	    LOAD_TOOLTIP.toString(),	false);
         saveButton = initChildButton(leftTool,	SAVE_ICON.toString(),	    SAVE_TOOLTIP.toString(),	true);
-        saveAsButton = initChildButton(leftTool,	SAVE_AS_ICON.toString(),	    SAVE_TOOLTIP.toString(),	true);
+        saveAsButton = initChildButton(leftTool,	SAVE_AS_ICON.toString(),	    SAVE_AS_TOOLTIP.toString(),	false);
+        photoButton = initChildButton(leftTool,	PHOTO_ICON.toString(),	    PHOTO_TOOLTIP.toString(),	false);
+        codeButton = initChildButton(leftTool,	CODE_ICON.toString(),	    CODE_TOOLTIP.toString(),	false);
         exitButton = initChildButton(leftTool,	EXIT_ICON.toString(),	    EXIT_TOOLTIP.toString(),	false);
+        selectButton = initChildButton2(midTool,	SELECT_ICON.toString(),	    SELECT_TOOLTIP.toString(),	false);
+        resizeButton = initChildButton2(midTool,	RESIZE_ICON.toString(),	    RESIZE_TOOLTIP.toString(),	false);
+        addClassButton = initChildButton2(midTool,	ADD_CLASS_ICON.toString(),	    ADD_CLASS_TOOLTIP.toString(),	false);
+        addInterfaceButton = initChildButton2(midTool,	ADD_INTERFACE_ICON.toString(),	    ADD_INTERFACE_TOOLTIP.toString(),	false);
+        removeButton = initChildButton2(midTool,	REMOVE_ICON.toString(),	    REMOVE_TOOLTIP.toString(),	false);
+        undoButton = initChildButton2(midTool,	UNDO_ICON.toString(),	    UNDO_TOOLTIP.toString(),	false);
+        redoButton = initChildButton2(midTool,	REDO_ICON.toString(),	    REDO_TOOLTIP.toString(),	false);
+        zoomInButton = initChildButton2(rightTool,	ZOOM_IN_ICON.toString(),	    ZOOM_IN_TOOLTIP.toString(),	false);
+        zoomOutButton = initChildButton2(rightTool,	ZOOM_OUT_ICON.toString(),	    ZOOM_OUT_TOOLTIP.toString(),	false);
 
 	// AND NOW SETUP THEIR EVENT HANDLERS
         fileController = new AppFileController(app);
@@ -213,11 +236,11 @@ public class AppGUI implements AppStyleArbiter {
     
     /**
      * This is a public helper method for initializing a simple button with
-     * an icon and tooltip and placing it into a toolbar.
+     * an string and tooltip and placing it into a toolbar.
      * 
      * @param toolbar Toolbar pane into which to place this button.
      * 
-     * @param icon Icon image file name for the button.
+     * @param icon  Name for the button.
      * 
      * @param tooltip Tooltip to appear when the user mouses over the button.
      * 
@@ -226,6 +249,22 @@ public class AppGUI implements AppStyleArbiter {
      * @return A constructed, fully initialized button placed into its appropriate
      * pane container.
      */
+    public Button initChildButton2(Pane toolbar, String icon, String tooltip, boolean disabled) {
+        PropertiesManager props = PropertiesManager.getPropertiesManager();
+	
+	// NOW MAKE THE BUTTON
+        Button button = new Button(props.getProperty(icon));
+        button.setDisable(disabled);
+        Tooltip buttonTooltip = new Tooltip(props.getProperty(tooltip));
+        button.setTooltip(buttonTooltip);
+	
+	// PUT THE BUTTON IN THE TOOLBAR
+        toolbar.getChildren().add(button);
+	
+	// AND RETURN THE COMPLETED BUTTON
+        return button;
+    }
+    
     public Button initChildButton(Pane toolbar, String icon, String tooltip, boolean disabled) {
         PropertiesManager props = PropertiesManager.getPropertiesManager();
 	
@@ -260,6 +299,9 @@ public class AppGUI implements AppStyleArbiter {
 	newButton.getStyleClass().add(CLASS_FILE_BUTTON);
 	loadButton.getStyleClass().add(CLASS_FILE_BUTTON);
 	saveButton.getStyleClass().add(CLASS_FILE_BUTTON);
+        saveAsButton.getStyleClass().add(CLASS_FILE_BUTTON);
+        photoButton.getStyleClass().add(CLASS_FILE_BUTTON);
+        codeButton.getStyleClass().add(CLASS_FILE_BUTTON);
 	exitButton.getStyleClass().add(CLASS_FILE_BUTTON);
     }
 }
