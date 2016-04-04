@@ -3,6 +3,7 @@ package saf.ui;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -64,6 +65,8 @@ public class AppGUI implements AppStyleArbiter {
     protected Button redoButton;
     protected Button zoomInButton;
     protected Button zoomOutButton;
+    protected CheckBox gridBox;
+    protected CheckBox snapBox;
     
     // HERE ARE OUR DIALOGS
     protected AppYesNoCancelDialogSingleton yesNoCancelDialog;
@@ -180,6 +183,10 @@ public class AppGUI implements AppStyleArbiter {
         redoButton = initChildButton2(midTool,	REDO_ICON.toString(),	    REDO_TOOLTIP.toString(),	false);
         zoomInButton = initChildButton2(rightTool,	ZOOM_IN_ICON.toString(),	    ZOOM_IN_TOOLTIP.toString(),	false);
         zoomOutButton = initChildButton2(rightTool,	ZOOM_OUT_ICON.toString(),	    ZOOM_OUT_TOOLTIP.toString(),	false);
+        gridBox = new CheckBox("grid");
+        rightTool.getChildren().add(gridBox);
+        snapBox = new CheckBox("snap");
+        rightTool.getChildren().add(snapBox);
 
 	// AND NOW SETUP THEIR EVENT HANDLERS
         fileController = new AppFileController(app);
@@ -303,5 +310,15 @@ public class AppGUI implements AppStyleArbiter {
         photoButton.getStyleClass().add(CLASS_FILE_BUTTON);
         codeButton.getStyleClass().add(CLASS_FILE_BUTTON);
 	exitButton.getStyleClass().add(CLASS_FILE_BUTTON);
+        selectButton.getStyleClass().add(CLASS_FILE_BUTTON);
+	resizeButton.getStyleClass().add(CLASS_FILE_BUTTON);
+	addClassButton.getStyleClass().add(CLASS_FILE_BUTTON);
+        addInterfaceButton.getStyleClass().add(CLASS_FILE_BUTTON);
+        removeButton.getStyleClass().add(CLASS_FILE_BUTTON);
+        undoButton.getStyleClass().add(CLASS_FILE_BUTTON);
+	redoButton.getStyleClass().add(CLASS_FILE_BUTTON);
+        zoomInButton.getStyleClass().add(CLASS_FILE_BUTTON);
+	zoomOutButton.getStyleClass().add(CLASS_FILE_BUTTON);
+
     }
 }
