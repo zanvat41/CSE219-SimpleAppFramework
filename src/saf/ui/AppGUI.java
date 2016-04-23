@@ -27,7 +27,7 @@ import saf.components.AppStyleArbiter;
  * which would be customly provided for each app.
  * 
  * @author Richard McKenna
- * @author ?
+ * @author Zhe Lin
  * @version 1.0
  */
 public class AppGUI implements AppStyleArbiter {
@@ -53,8 +53,8 @@ public class AppGUI implements AppStyleArbiter {
     protected Button loadButton;
     protected Button saveButton;
     protected Button saveAsButton;
-    protected Button photoButton;
-    protected Button codeButton;
+    public Button photoButton;
+    public Button codeButton;
     protected Button exitButton;
     public Button selectButton;
     public Button resizeButton;
@@ -174,15 +174,15 @@ public class AppGUI implements AppStyleArbiter {
         photoButton = initChildButton(leftTool,	PHOTO_ICON.toString(),	    PHOTO_TOOLTIP.toString(),	false);
         codeButton = initChildButton(leftTool,	CODE_ICON.toString(),	    CODE_TOOLTIP.toString(),	false);
         exitButton = initChildButton(leftTool,	EXIT_ICON.toString(),	    EXIT_TOOLTIP.toString(),	false);
-        selectButton = initChildButton2(midTool,	SELECT_ICON.toString(),	    SELECT_TOOLTIP.toString(),	false);
-        resizeButton = initChildButton2(midTool,	RESIZE_ICON.toString(),	    RESIZE_TOOLTIP.toString(),	false);
-        addClassButton = initChildButton2(midTool,	ADD_CLASS_ICON.toString(),	    ADD_CLASS_TOOLTIP.toString(),	false);
-        addInterfaceButton = initChildButton2(midTool,	ADD_INTERFACE_ICON.toString(),	    ADD_INTERFACE_TOOLTIP.toString(),	false);
-        removeButton = initChildButton2(midTool,	REMOVE_ICON.toString(),	    REMOVE_TOOLTIP.toString(),	false);
-        undoButton = initChildButton2(midTool,	UNDO_ICON.toString(),	    UNDO_TOOLTIP.toString(),	false);
-        redoButton = initChildButton2(midTool,	REDO_ICON.toString(),	    REDO_TOOLTIP.toString(),	false);
-        zoomInButton = initChildButton2(rightTool,	ZOOM_IN_ICON.toString(),	    ZOOM_IN_TOOLTIP.toString(),	false);
-        zoomOutButton = initChildButton2(rightTool,	ZOOM_OUT_ICON.toString(),	    ZOOM_OUT_TOOLTIP.toString(),	false);
+        selectButton = initChildButton(midTool,	SELECT_ICON.toString(),	    SELECT_TOOLTIP.toString(),	false);
+        resizeButton = initChildButton(midTool,	RESIZE_ICON.toString(),	    RESIZE_TOOLTIP.toString(),	false);
+        addClassButton = initChildButton(midTool,	ADD_CLASS_ICON.toString(),	    ADD_CLASS_TOOLTIP.toString(),	false);
+        addInterfaceButton = initChildButton(midTool,	ADD_INTERFACE_ICON.toString(),	    ADD_INTERFACE_TOOLTIP.toString(),	false);
+        removeButton = initChildButton(midTool,	REMOVE_ICON.toString(),	    REMOVE_TOOLTIP.toString(),	false);
+        undoButton = initChildButton(midTool,	UNDO_ICON.toString(),	    UNDO_TOOLTIP.toString(),	false);
+        redoButton = initChildButton(midTool,	REDO_ICON.toString(),	    REDO_TOOLTIP.toString(),	false);
+        zoomInButton = initChildButton(rightTool,	ZOOM_IN_ICON.toString(),	    ZOOM_IN_TOOLTIP.toString(),	false);
+        zoomOutButton = initChildButton(rightTool,	ZOOM_OUT_ICON.toString(),	    ZOOM_OUT_TOOLTIP.toString(),	false);
         gridBox = new CheckBox("grid");
         rightTool.getChildren().add(gridBox);
         snapBox = new CheckBox("snap");
@@ -319,6 +319,7 @@ public class AppGUI implements AppStyleArbiter {
 	redoButton.getStyleClass().add(CLASS_FILE_BUTTON);
         zoomInButton.getStyleClass().add(CLASS_FILE_BUTTON);
 	zoomOutButton.getStyleClass().add(CLASS_FILE_BUTTON);
+ 
 
     }
 }
