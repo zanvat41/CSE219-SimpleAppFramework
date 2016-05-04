@@ -170,7 +170,7 @@ public class AppGUI implements AppStyleArbiter {
         newButton = initChildButton(leftTool,	NEW_ICON.toString(),	    NEW_TOOLTIP.toString(),	false);
         loadButton = initChildButton(leftTool,	LOAD_ICON.toString(),	    LOAD_TOOLTIP.toString(),	false);
         saveButton = initChildButton(leftTool,	SAVE_ICON.toString(),	    SAVE_TOOLTIP.toString(),	true);
-        saveAsButton = initChildButton(leftTool,	SAVE_AS_ICON.toString(),	    SAVE_AS_TOOLTIP.toString(),	false);
+        saveAsButton = initChildButton(leftTool,	SAVE_AS_ICON.toString(),	    SAVE_AS_TOOLTIP.toString(),	true);
         photoButton = initChildButton(leftTool,	PHOTO_ICON.toString(),	    PHOTO_TOOLTIP.toString(),	false);
         codeButton = initChildButton(leftTool,	CODE_ICON.toString(),	    CODE_TOOLTIP.toString(),	false);
         exitButton = initChildButton(leftTool,	EXIT_ICON.toString(),	    EXIT_TOOLTIP.toString(),	false);
@@ -200,7 +200,7 @@ public class AppGUI implements AppStyleArbiter {
             fileController.handleSaveRequest();
         });
         saveAsButton.setOnAction(e -> {
-            //fileController.handleSaveAsRequest();
+            fileController.handleSaveAsRequest();
         });
         exitButton.setOnAction(e -> {
             fileController.handleExitRequest();
