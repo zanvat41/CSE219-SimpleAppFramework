@@ -86,6 +86,7 @@ public class AppFileController {
         try {
             // WE MAY HAVE TO SAVE CURRENT WORK
             boolean continueToMakeNew = true;
+            //System.out.println(saved);
             if (!saved) {
                 // THE USER CAN OPT OUT HERE WITH A CANCEL
                 continueToMakeNew = promptToSave();
