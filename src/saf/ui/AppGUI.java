@@ -326,4 +326,9 @@ public class AppGUI implements AppStyleArbiter {
     public AppFileController getAFC() {
         return fileController;
     }
+    
+    public Stage getStage() {
+        return primaryStage;
+    }
+    
 }
