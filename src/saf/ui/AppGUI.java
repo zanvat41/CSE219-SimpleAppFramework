@@ -63,10 +63,10 @@ public class AppGUI implements AppStyleArbiter {
     public Button removeButton;
     public Button undoButton;
     public Button redoButton;
-    protected Button zoomInButton;
-    protected Button zoomOutButton;
-    protected CheckBox gridBox;
-    protected CheckBox snapBox;
+    public Button zoomInButton;
+    public Button zoomOutButton;
+    public CheckBox gridBox;
+    public CheckBox snapBox;
     
     // HERE ARE OUR DIALOGS
     protected AppYesNoCancelDialogSingleton yesNoCancelDialog;
