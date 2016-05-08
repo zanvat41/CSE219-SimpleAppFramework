@@ -138,6 +138,27 @@ public class AppFileController {
 
             // IF THE USER REALLY WANTS TO OPEN A Course
             if (continueToOpen) {
+                // RESET THE DATA, WHICH SHOULD TRIGGER A RESET OF THE UI
+                app.getDataComponent().reset();        
+
+		// LOAD ALL THE DATA INTO THE WORKSPACE
+		app.getWorkspaceComponent().reloadWorkspace();	
+
+		// MAKE SURE THE WORKSPACE IS ACTIVATED
+		app.getWorkspaceComponent().activateWorkspace(app.getGUI().getAppPane());
+		
+		// WORK IS NOT SAVED
+                saved = false;
+		currentWorkFile = null;
+
+                // REFRESH THE GUI, WHICH WILL ENABLE AND DISABLE
+                // THE APPROPRIATE CONTROLS
+                app.getGUI().updateToolbarControls(saved);
+		app.getWorkspaceComponent().reloadWorkspace();
+                
+                
+                
+                
                 // GO AHEAD AND PROCEED LOADING A Course
                 promptToOpen();
             }
@@ -214,6 +235,8 @@ public class AppFileController {
     private void saveWork(File selectedFile) throws IOException {
 	// SAVE IT TO A FILE
 	app.getFileComponent().saveData(app.getDataComponent(), selectedFile.getPath());
+        
+        //System.out.println(selectedFile.getPath());
         
 	// MARK IT AS SAVED
 	currentWorkFile = selectedFile;
@@ -348,6 +371,8 @@ public class AppFileController {
 		app.getWorkspaceComponent().activateWorkspace(app.getGUI().getAppPane());
                 saved = true;
                 app.getGUI().updateToolbarControls(saved);
+                              
+                
                 
             } catch (Exception e) {
                 AppMessageDialogSingleton dialog = AppMessageDialogSingleton.getSingleton();
@@ -356,6 +381,61 @@ public class AppFileController {
         }
     }
 
+    public void toOpen(String filePath) {
+        // RESET THE DATA, WHICH SHOULD TRIGGER A RESET OF THE UI
+        app.getDataComponent().reset();        
+
+	// LOAD ALL THE DATA INTO THE WORKSPACE
+	app.getWorkspaceComponent().reloadWorkspace();	
+
+	// MAKE SURE THE WORKSPACE IS ACTIVATED
+	app.getWorkspaceComponent().activateWorkspace(app.getGUI().getAppPane());
+		
+	// WORK IS NOT SAVED
+        saved = false;
+	currentWorkFile = null;
+
+        // REFRESH THE GUI, WHICH WILL ENABLE AND DISABLE
+        // THE APPROPRIATE CONTROLS
+        app.getGUI().updateToolbarControls(saved);
+        app.getWorkspaceComponent().reloadWorkspace();        
+        
+        
+        
+        
+	// WE'LL NEED TO GET CUSTOMIZED STUFF WITH THIS
+	PropertiesManager props = PropertiesManager.getPropertiesManager();
+	
+        // AND NOW ASK THE USER FOR THE FILE TO OPEN
+        /*FileChooser fc = new FileChooser();
+        fc.setInitialDirectory(new File(PATH_WORK));
+	fc.setTitle(props.getProperty(LOAD_WORK_TITLE));
+        File selectedFile = fc.showOpenDialog(app.getGUI().getWindow());*/
+
+        // ONLY OPEN A NEW FILE IF THE USER SAYS OK
+        //if (selectedFile != null) {
+            try {
+                AppDataComponent dataManager = app.getDataComponent();
+		AppFileComponent fileManager = app.getFileComponent();
+
+                fileManager.loadData(dataManager, filePath);
+                app.getWorkspaceComponent().reloadWorkspace();
+
+		// MAKE SURE THE WORKSPACE IS ACTIVATED
+		app.getWorkspaceComponent().activateWorkspace(app.getGUI().getAppPane());
+                saved = true;
+                app.getGUI().updateToolbarControls(saved);
+                              
+                
+                
+            } catch (Exception e) {
+                AppMessageDialogSingleton dialog = AppMessageDialogSingleton.getSingleton();
+                dialog.show(props.getProperty(LOAD_ERROR_TITLE), props.getProperty(LOAD_ERROR_MESSAGE));
+            }
+        //}
+    }
+    
+    
     /**
      * This mutator method marks the file as not saved, which means that when
      * the user wants to do a file-type operation, we should prompt the user to
